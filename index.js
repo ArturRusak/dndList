@@ -51,9 +51,6 @@ $('#jstree2').jstree({
       console.log('DUPLIcate')
     }
   },
-  "questionmark": function () {
-    console.log(1111)
-  },
   "contextmenu":{
     "show_at_node": false,
     "items": function($node) {
@@ -108,7 +105,7 @@ $('#jstree2').jstree({
       }
     }
   },
-  "plugins": ["dnd", "wholerow", "contextmenu", "unique", "questionmark"]
+  "plugins": ["dnd", "wholerow", "contextmenu", "unique", "customcontextmenu"]
 });
 
 
@@ -116,7 +113,6 @@ function removeTree(id) {
   const instanceTree = $(id).jstree(true);
   const jsonNodes = instanceTree.get_json('#', {flat: true});
 
-  console.log(jsonNodes);
   $.each(jsonNodes, (index, val) => {
     const nodeID = $(val).attr('id');
     instanceTree.delete_node(nodeID);
