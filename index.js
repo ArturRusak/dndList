@@ -1,11 +1,19 @@
 const actions = {
   text: 'Actions',
+  data: {
+    test: '11111'
+  },
   children: [
     {
-      text: 'Fetch data'
+      text: 'Fetch data',
+      type: 'file',
+      data: {
+        test: 'test'
+      }
     },
     {
-      text: 'Downdload data'
+      text: 'Downdload data',
+      type: 'file',
     }
   ]
 };
@@ -31,25 +39,25 @@ $('#jstree').jstree({
   'dnd': {
     'always_copy': true
   },
-  "plugins": ["dnd", "unique", ]
+  "plugins": ["dnd", "unique", "changed"]
 });
 
 $('#jstree2').jstree({
   'core': {
-    "check_callback": function (...props) {
-      if (props === "clone_node") {
-        console.log(111)
-      }
-      if (props === "move_node") {
-        console.log(111)
+    "check_callback": function (operation, node) {
+      if(operation === 'copy_node') {
+        $.debounce((400, console.log(1222));
       }
     },
     'data': []
   },
-  "unique": {
-    "duplicate": function () {
-      console.log('DUPLIcate')
+  "node_customize": {
+    "default": function (test, node) {
+      console.log(test, '111', node)
     }
+  },
+  "numbering": {
+    "liMarginLeft": 24
   },
   "contextmenu":{
     "show_at_node": false,
@@ -105,7 +113,16 @@ $('#jstree2').jstree({
       }
     }
   },
-  "plugins": ["dnd", "wholerow", "contextmenu", "unique", "customcontextmenu"]
+  "plugins": [
+    "dnd",
+    "wholerow",
+    "changed",
+    "contextmenu",
+    "unique",
+    "customcontextmenu",
+    "numbering",
+    "node_customize"
+  ]
 });
 
 
@@ -119,7 +136,13 @@ function removeTree(id) {
   })
 }
 
-$(document).on('click', () => {
-  $('#jstree2').jstree(true).get_json('#', {flat: true});
+$(document).on("click", () => {
+ console.log($('#jstree2').jstree(true).get_json("#", {flat: true}));
+
 });
+
+$('#jstree2').on('changed.jstree copy_node.jstree', () => {
+  $('#jstree2').jstree(true).redraw(true);
+});
+
 
