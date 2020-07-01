@@ -45,6 +45,68 @@
   };
 })(jQuery);
 
+(function ($, undefined) {
+  "use strict";
+  $.jstree.defaults.details = {
+    confirm_fn: null,
+  };
+  $.jstree.plugins.details = function (options, parent) {
+    this.bind = function () {
+      parent.bind.call(this);
+      this.element
+        .on("click.jstree", ".jstree-details", $.proxy(function (e) {
+          e.stopImmediatePropagation();
+
+          var node = this.get_node(e.target);
+          this.settings.details.confirm_fn.bind(this, node);
+          this.append_detais(node)
+        }, this));
+    };
+    this.append_detais = function (node) {
+      this.removeDetails();
+
+      var node = this.get_node(node, true);
+      var nodeId = $(node).attr('id');
+
+
+      $('#jstree2').on('click.foo', '#' + nodeId + ' .jstree-details-close', this.removeDetails);
+      $('#jstree2').on('click.foo', '#' + nodeId + ' .jstree-details-confirm', () => {
+        var data = $(node).find('.jstree-details-text').val();
+        this.settings.details.confirm_fn(node, data, () => setTimeout(() => this.removeDetails(), 500))
+      });
+
+      $('#' + nodeId + '_anchor').after('' +
+        '<div class="jstree-details-actions">' +
+        '<textarea class="jstree-details-text"></textarea>' +
+        '<button class="jstree-details-confirm">ok</button>' +
+        '<button class="jstree-details-close">close</button>' +
+        '</div>'
+      );
+    };
+    // Todo make dynamic
+    this.removeDetails = function () {
+      $('#jstree2').find('.jstree-details-actions').remove();
+      $('#jstree2').off('click.foo');
+    };
+
+    this.teardown = function () {
+      if(this.settings.details) {
+        this.element.find(".jstree-details").remove();
+      }
+      parent.teardown.call(this);
+    };
+
+
+    this.redraw_node = function(obj, deep, callback, force_draw) {
+      obj = parent.redraw_node.call(this, obj, deep, callback, force_draw);
+      if(obj) {
+        $(obj).append($('<i class="jstree-details fa fa-info-circle"></i>'));
+      }
+      return obj;
+    };
+  };
+})(jQuery);
+
 // auto numbering
 (function ($, undefined) {
   "use strict";

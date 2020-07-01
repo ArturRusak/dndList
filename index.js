@@ -3,23 +3,23 @@ const actions = {
   data: {
     test: '11111'
   },
+  type: 'tree',
   children: [
     {
       text: 'Fetch data',
-      type: 'file',
+      type: 'mytype',
       data: {
-        test: 'test'
+        test: 'mytype'
       }
     },
     {
       text: 'Downdload data',
-      type: 'file',
+      type: 'mytype',
     }
   ]
 };
 
 const flow = {
-  id: '2',
   text: 'Flow',
   children: [
     {
@@ -34,30 +34,57 @@ const flow = {
 
 $('#jstree').jstree({
   'core': {
+    'check_callback': function (op, node, par, pos, more) {
+      var isParentNode = more && more.dnd && (op === 'move_node' || op === 'copy_node') && node.parent === '#';
+
+      if(isParentNode){
+        return false;
+      }
+    },
     'data': [actions, flow]
+  },
+  "types": {
+    "tree" : {
+      "icon" : 'https://www.jstree.com/tree-icon.png'
+    },
+    "mytype" : {
+      "icon" : 'glyphicon glyphicon-leaf'
+    }
   },
   'dnd': {
     'always_copy': true
   },
-  "plugins": ["dnd", "unique", "changed"]
+  "plugins": ["dnd", "unique", "changed", "types"]
 });
 
 $('#jstree2').jstree({
   'core': {
-    "check_callback": function (operation, node) {
-      if(operation === 'copy_node') {
-        $.debounce((400, console.log(1222));
+    'check_callback': function (op, node, par, pos, more) {
+      var isParentNode = more && more.dnd && (op === 'move_node' || op === 'copy_node') && node.parent === '#';
+      if(isParentNode){
+        return false;
       }
     },
     'data': []
   },
-  "node_customize": {
-    "default": function (test, node) {
-      console.log(test, '111', node)
-    }
-  },
   "numbering": {
     "liMarginLeft": 24
+  },
+  "details": {
+    "confirm_fn": function (node, data, callback) {
+      // TODO add callback
+
+      console.log(node, data, 'Callbak Data')
+      callback && callback();
+    }
+  },
+  "types": {
+    "tree" : {
+      "icon" : 'https://www.jstree.com/tree-icon.png'
+    },
+    "mytype" : {
+      "icon" : 'glyphicon glyphicon-leaf'
+    }
   },
   "contextmenu":{
     "show_at_node": false,
@@ -115,13 +142,13 @@ $('#jstree2').jstree({
   },
   "plugins": [
     "dnd",
-    "wholerow",
+    "types",
     "changed",
     "contextmenu",
-    "unique",
     "customcontextmenu",
     "numbering",
-    "node_customize"
+    "node_customize",
+    "details"
   ]
 });
 
@@ -141,7 +168,12 @@ $(document).on("click", () => {
 
 });
 
-$('#jstree2').on('changed.jstree copy_node.jstree', () => {
+$('#jstree2').on('changed.jstree', () => {
+  $('#jstree2').jstree(true).redraw(true);
+});
+
+$('#jstree2').on('copy_node.jstree', (e, data) => {
+  data.node.data = $.extend(true, {}, data.original.data);
   $('#jstree2').jstree(true).redraw(true);
 });
 
