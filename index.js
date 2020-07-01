@@ -1,55 +1,151 @@
-const actions = {
-  text: 'Actions',
-  data: {
-    test: '11111'
+const flow_list = [
+  {
+    "text": "Item 1",
+    "type": "flow",
+    "data": {
+      "someData": "Item data"
+    }
   },
-  type: 'tree',
-  children: [
-    {
-      text: 'Fetch data',
-      type: 'mytype',
-      data: {
-        test: 'mytype'
-      }
-    },
-    {
-      text: 'Downdload data',
-      type: 'mytype',
+  {
+    "text": "Item 2",
+    "type": "flow",
+    "data": {
+      "someData": "Item data"
     }
-  ]
-};
-
-const flow = {
-  text: 'Flow',
-  children: [
-    {
-      text: 'Fetch data'
-    },
-    {
-      text: 'Downdload data'
+  },
+  {
+    "text": "Item 3",
+    "type": "flow",
+    "data": {
+      "someData": "Item data"
     }
-  ]
-};
+  },
+];
+
+const conditions_list = [
+  {
+    "text": "If",
+    "type": "condition",
+    "data": {
+      "someData": "conditions data"
+    }
+  },
+  {
+    "text": "For",
+    "type": "condition",
+    "data": {
+      "someData": "conditions data"
+    }
+  },
+];
+
+const actions_list = [
+  {
+    "text": "Pull Data",
+    "type": "action",
+    "data": {
+      "someData": "test data"
+    }
+  },
+  {
+    "text": "New Query",
+    "type": "action",
+    "data": {
+      "someData": "test data"
+    }
+  },
+  {
+    "text": "API Data",
+    "type": "action",
+    "data": {
+      "someData": "test data"
+    }
+  },
+  {
+    "text": "To Source",
+    "type": "action",
+    "data": {
+      "someData": "test data"
+    }
+  },
+  {
+    "text": "To Target",
+    "type": "action",
+    "data": {
+      "someData": "test data"
+    }
+  },
+  {
+    "text": "Map",
+    "type": "action",
+    "data": {
+      "someData": "test data"
+    }
+  },
+  {
+    "text": "Join",
+    "type": "action",
+    "data": {
+      "someData": "test data"
+    }
+  },
+  {
+    "text": "Replicate",
+    "type": "action",
+    "data": {
+      "someData": "test data"
+    }
+  },
+];
 
 
-$('#jstree').jstree({
+$('#actions_list').jstree({
   'core': {
-    'check_callback': function (op, node, par, pos, more) {
-      var isParentNode = more && more.dnd && (op === 'move_node' || op === 'copy_node') && node.parent === '#';
+    'check_callback': function (oporation) {
+      var isChangePosition = oporation === 'move_node' || oporation === 'copy_node'
 
-      if(isParentNode){
+      if(isChangePosition){
         return false;
       }
     },
-    'data': [actions, flow]
+    'data': actions_list,
   },
   "types": {
-    "tree" : {
+    "action" : {
       "icon" : 'https://www.jstree.com/tree-icon.png'
     },
-    "mytype" : {
-      "icon" : 'glyphicon glyphicon-leaf'
-    }
+  },
+  'dnd': {
+    'always_copy': true
+  },
+  "plugins": ["dnd", "unique", "changed", "types"]
+});
+
+$('#condition_list').jstree({
+  'core': {
+    'check_callback': true,
+    'data': conditions_list,
+  },
+  "types": {
+    "condition" : {
+      "icon" : 'https://www.jstree.com/tree-icon.png'
+    },
+  },
+  'dnd': {
+    'always_copy': true
+  },
+  "plugins": ["dnd", "unique", "changed", "types"]
+});
+
+$('#flows_list').jstree({
+  'core': {
+    'check_callback': true,
+    'data': flow_list,
+  },
+  "types": {
+    "flow" : {
+      "icon" : 'https://www.jstree.com/tree-icon.png'
+    },
   },
   'dnd': {
     'always_copy': true
@@ -60,9 +156,9 @@ $('#jstree').jstree({
 $('#jstree2').jstree({
   'core': {
     'check_callback': function (op, node, par, pos, more) {
-      var isParentNode = more && more.dnd && (op === 'move_node' || op === 'copy_node') && node.parent === '#';
-      if(isParentNode){
-        return false;
+      if((op === "move_node" || op === "copy_node") && more && more.dnd) {
+        console.log('MOUSE')
+        // use more.pos to update your own marker
       }
     },
     'data': []
