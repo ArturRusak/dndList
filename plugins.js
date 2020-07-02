@@ -55,15 +55,25 @@
       parent.bind.call(this);
       this.element
         .on("click.jstree", ".jstree-details", $.proxy(function (e) {
+          var isOpenedDetails = $(e.target).hasClass('active');
+
           e.stopImmediatePropagation();
+          if (isOpenedDetails) {
+            e.preventDefault();
+            return;
+          }
+
+          this.removeDetails();
+
+          $(e.target).addClass('active');
 
           var node = this.get_node(e.target);
           this.settings.details.confirm_fn.bind(this, node);
           this.append_detais(node)
         }, this));
     };
+
     this.append_detais = function (node) {
-      this.removeDetails();
 
       var node = this.get_node(node, true);
       var nodeId = $(node).attr('id');
@@ -84,8 +94,10 @@
       );
     };
     // Todo make dynamic
+
     this.removeDetails = function () {
       $('#jstree2').find('.jstree-details-actions').remove();
+      $('#jstree2 .jstree-details').removeClass('active');
       $('#jstree2').off('click.foo');
     };
 
