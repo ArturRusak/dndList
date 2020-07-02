@@ -1,0 +1,109 @@
+.red-bg {
+  background: #E26889; }
+
+.blue-bg {
+  background: #67CAE2; }
+
+.orange-bg {
+  background: #E2B367; }
+
+.purple-bg {
+  background: #A568E2; }
+
+.salad-bg {
+  background: #8BE268; }
+
+.yellow-bg {
+  background: #E2E268; }
+
+#actions_list .jstree-node,
+#actions_list .jstree-icon,
+#condition_list .jstree-node,
+#condition_list .jstree-icon,
+#flows_list .jstree-node,
+#flows_list .jstree-icon {
+  background: none; }
+#actions_list .jstree-icon,
+#condition_list .jstree-icon,
+#flows_list .jstree-icon {
+  display: none; }
+
+#actions_list > .jstree-container-ul,
+#condition_list > .jstree-container-ul {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 300px; }
+
+#actions_list .jstree-anchor,
+#condition_list .jstree-anchor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  padding: 4px 5px; }
+  #actions_list .jstree-anchor .title-icon,
+  #condition_list .jstree-anchor .title-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 25px;
+    min-height: 25px;
+    padding: 0 5px;
+    color: #fff; }
+  #actions_list .jstree-anchor .title,
+  #condition_list .jstree-anchor .title {
+    font-size: 0.8em;
+    line-height: 1.2em;
+    color: #999999; }
+  #actions_list .jstree-anchor i,
+  #condition_list .jstree-anchor i {
+    display: none; }
+#actions_list .jstree-node,
+#condition_list .jstree-node {
+  max-width: 33%;
+  width: 100%; }
+
+#flows_list .jstree-node {
+  margin-bottom: 0.5em; }
+  #flows_list .jstree-node:last-child {
+    margin-bottom: 0; }
+#flows_list .jstree-anchor {
+  height: auto;
+  padding: 4px 5px;
+  min-width: 250px;
+  line-height: 1.2em;
+  background: #dadada; }
+  #flows_list .jstree-anchor .title-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: start; }
+  #flows_list .jstree-anchor .title-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    color: #ffffff;
+    margin-right: 0.5em; }
+  #flows_list .jstree-anchor .title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+    flex-grow: 1; }
+  #flows_list .jstree-anchor .title {
+    font-size: 15px;
+    margin-bottom: 8px; }
+  #flows_list .jstree-anchor .title-filters > * {
+    padding: 2px 5px;
+    margin-right: .5em;
+    font-size: 10px;
+    background: no-repeat;
+    border: 1px solid #3333;
+    border-radius: 4px; }
+    #flows_list .jstree-anchor .title-filters > * > *:last-child {
+      margin-right: 0; }
+
+/*# sourceMappingURL=style.css.map */

@@ -1,22 +1,34 @@
 const flow_list = [
   {
     "text": "Item 1",
+    "iconMark": "W",
+    "filters": {
+      "labels": ["CRM", "Paid"],
+    },
     "type": "flow",
-    "data": {
+    "metadata": {
       "someData": "Item data"
     }
   },
   {
     "text": "Item 2",
+    "iconMark": "W",
+    "filters": {
+      "labels": ["CRM", "Paid"],
+    },
     "type": "flow",
-    "data": {
+    "metadata": {
       "someData": "Item data"
     }
   },
   {
     "text": "Item 3",
+    "iconMark": "W",
+    "filters": {
+      "labels": ["CRM", "Paid"],
+    },
     "type": "flow",
-    "data": {
+    "metadata": {
       "someData": "Item data"
     }
   },
@@ -25,15 +37,17 @@ const flow_list = [
 const conditions_list = [
   {
     "text": "If",
+    "iconMark": "If",
     "type": "condition",
-    "data": {
+    "metadata": {
       "someData": "conditions data"
     }
   },
   {
     "text": "For",
+    "iconMark": "Fo",
     "type": "condition",
-    "data": {
+    "metadata": {
       "someData": "conditions data"
     }
   },
@@ -42,55 +56,63 @@ const conditions_list = [
 const actions_list = [
   {
     "text": "Pull Data",
+    "iconMark": "Q",
     "type": "action",
-    "data": {
+    "metadata": {
       "someData": "test data"
     }
   },
   {
     "text": "New Query",
+    "iconMark": "Q",
     "type": "action",
-    "data": {
+    "metadata": {
       "someData": "test data"
     }
   },
   {
     "text": "API Data",
+    "iconMark": "A",
     "type": "action",
-    "data": {
+    "metadata": {
       "someData": "test data"
     }
   },
   {
     "text": "To Source",
+    "iconMark": "S",
     "type": "action",
-    "data": {
+    "metadata": {
       "someData": "test data"
     }
   },
   {
     "text": "To Target",
+    "iconMark": "T",
     "type": "action",
-    "data": {
+    "metadata": {
       "someData": "test data"
     }
   },
   {
     "text": "Map",
+    "iconMark": "M",
     "type": "action",
-    "data": {
+    "metadata": {
       "someData": "test data"
     }
   },
   {
     "text": "Join",
+    "iconMark": "J",
     "type": "action",
-    "data": {
+    "metadata": {
       "someData": "test data"
     }
   },
   {
     "text": "Replicate",
+    "iconMark": "R",
     "type": "action",
     "data": {
       "someData": "test data"
@@ -98,21 +120,86 @@ const actions_list = [
   },
 ];
 
+function getRandomClass(list) {
+  return list[Math.floor(Math.random() * list.length)]
+}
+
+function getColorByKey(key, obj) {
+  return obj[key.toUpperCase()];
+}
+
+/**
+ * Preparation of node,
+ * setting of icon for (Actions, Conditions)
+ */
+function prepareNodes(dataList) {
+  const bgClassList = ['red-bg', 'blue-bg', 'orange-bg', 'purple-bg', 'salad-bg', 'yellow-bg'];
+  const filtersColorMap = {
+    CRM: "#8BE268",
+    PAID: "#67CAE2",
+  };
+
+  const updatedList = dataList.map((item) => {
+    const randomClassName = getRandomClass(bgClassList);
+    let { text, iconMark, className, type, filters } = item;
+    let filterLabelsHtml = null;
+    className = className ? className : randomClassName;
+
+    if (type !== "flow") {
+      const firstChart = text.charAt(0).toUpperCase();
+
+      iconMark = iconMark ? iconMark : firstChart;
+
+      return {
+        ...item,
+        text: `<span class='title-icon ${className}'>${iconMark}</span><div class='title'>${text}</div>`
+      };
+    }
+
+    if (filters && filters.labels) {
+      const filtersHTMLList = filters.labels.map((label) => {
+        const color = getColorByKey(label, filtersColorMap);
+        return `<span class="${getRandomClass(bgClassList)}" style="border: 1px solid ${color}; color: ${color}; border-radius: 3px;">${label}</span>`
+      });
+      filterLabelsHtml = filters.labels.length && `<div class="title-filters" >${filtersHTMLList.join('')}</div>`;
+    }
+
+    return {
+      ...item,
+      text: `
+        <div class="title-wrapper">
+            <span class='title-icon ${className}'>
+                ${iconMark}
+            </span>
+            <div class="title-container">
+                <span class="title">${text}</span>
+                ${filterLabelsHtml && filterLabelsHtml}
+            </div>
+        </div>`
+    };
+  });
+
+  return updatedList;
+}
+
 
 $('#actions_list').jstree({
   'core': {
     'check_callback': function (oporation) {
-      var isChangePosition = oporation === 'move_node' || oporation === 'copy_node'
+      var isChangePosition = oporation === 'move_node' || oporation === 'copy_node';
 
       if(isChangePosition){
         return false;
       }
     },
-    'data': actions_list,
+    'data': prepareNodes(actions_list),
   },
   "types": {
+    "default": {
+      "icon" : false
+    },
     "action" : {
-      "icon" : 'https://www.jstree.com/tree-icon.png'
+      "icon" : false,
     },
   },
   'dnd': {
@@ -123,12 +210,21 @@ $('#actions_list').jstree({
 
 $('#condition_list').jstree({
   'core': {
-    'check_callback': true,
-    'data': conditions_list,
+    'check_callback': function (oporation) {
+      var isChangePosition = oporation === 'move_node' || oporation === 'copy_node';
+
+      if(isChangePosition){
+        return false;
+      }
+    },
+    'data': prepareNodes(conditions_list),
   },
   "types": {
+    "default": {
+      "icon" : false
+    },
     "condition" : {
-      "icon" : 'https://www.jstree.com/tree-icon.png'
+      "icon" : false
     },
   },
   'dnd': {
@@ -139,12 +235,21 @@ $('#condition_list').jstree({
 
 $('#flows_list').jstree({
   'core': {
-    'check_callback': true,
-    'data': flow_list,
+    'check_callback': function (oporation) {
+      var isChangePosition = oporation === 'move_node' || oporation === 'copy_node';
+
+      if(isChangePosition){
+        return false;
+      }
+    },
+    'data': prepareNodes(flow_list),
   },
   "types": {
+    "default": {
+      "icon" : false
+    },
     "flow" : {
-      "icon" : 'https://www.jstree.com/tree-icon.png'
+      "icon" : false
     },
   },
   'dnd': {
@@ -243,7 +348,6 @@ $('#jstree2').jstree({
     "contextmenu",
     "customcontextmenu",
     "numbering",
-    "node_customize",
     "details"
   ]
 });
@@ -269,7 +373,7 @@ $('#jstree2').on('changed.jstree', () => {
 });
 
 $('#jstree2').on('copy_node.jstree', (e, data) => {
-  data.node.data = $.extend(true, {}, data.original.data);
+  data.node.metadata = $.extend(true, {}, data.original.metadata);
   $('#jstree2').jstree(true).redraw(true);
 });
 

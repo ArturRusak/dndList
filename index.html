@@ -24,6 +24,7 @@
             integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
             crossorigin="anonymous"></script>
     <script src="./plugins.js"></script>
+    <link rel="stylesheet" href="style.css">
     <style>
         #jstree2 {
             padding: 1em;
@@ -85,18 +86,12 @@
             background-position: top;
             transition: all 0.4s ease;
         }
-
-        #actions_list > .jstree-container-ul {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-        }
     </style>
 </head>
 <body>
 <h1>JS TREE</h1>
 <div class="row no-gutters">
-    <div class="col-3">
+    <div class="col-4">
         <ul class="custom-tabs nav nav-tabs border-0" id="myTab" role="tablist">
             <li class="nav-item border-0">
                 <a class="nav-link active p-0" id="home-tab" data-toggle="tab" href="#actions" role="tab" aria-controls="actions" aria-selected="true">Actions</a>
@@ -138,7 +133,7 @@
         </div>
 
     </div>
-    <div class="col-9">
+    <div class="col-8">
         <button onclick="removeTree('#jstree2')">remove flow</button>
         <div id="jstree2"></div>
     </div>
