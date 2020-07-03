@@ -1,16 +1,5 @@
 (function ($, undefined) {
   "use strict";
-  var img = document.createElement('IMG');
-  img.src = "https://img.icons8.com/fluent/48/000000/question-mark.png";
-  img.className = "jstree-custom-context-menu";
-  img.style.mxWidth = '100%';
-  img.style.maxHeight = '20px';
-  img.style.position = 'absolute';
-  img.style.right = '0';
-  img.style.top = '0';
-  img.style.zIndex = '9';
-  img.style.cursor = 'pointer';
-
   $.jstree.defaults.customcontextmenu = $.noop;
   $.jstree.plugins.customcontextmenu = function (options, parent) {
     this.bind = function () {
@@ -37,8 +26,8 @@
     this.redraw_node = function(obj, deep, callback, force_draw) {
       obj = parent.redraw_node.call(this, obj, deep, callback, force_draw);
       if(obj) {
-        var tmp = img.cloneNode(true);
-        obj.append(tmp);
+        var tmp = '<div class="jstree-custom-context-menu"><span>...</span></div>';
+        $(obj).find('.jstree-anchor').append($(tmp));
       }
       return obj;
     };
@@ -78,27 +67,35 @@
       var node = this.get_node(node, true);
       var nodeId = $(node).attr('id');
 
+      $('#' + nodeId + '_anchor').after('' +
+        '<div class="jstree-details-container">' +
+          '<div class="jstree-details-input">' +
+            '<span class="jstree-details-input-label">Details</span>' +
+            '<textarea class="jstree-details-input-text"></textarea>' +
+          '</div>' +
+          '<div class="jstree-details-actions">' +
+            '<button class="jstree-details-confirm"><i class="fa fa-check" aria-hidden="true"></i></button>' +
+            '<button class="jstree-details-close"><i class="fa fa-times" aria-hidden="true"></i></button>' +
+          '</div>'+
+        '</div>'
+      );
 
       $('#jstree2').on('click.foo', '#' + nodeId + ' .jstree-details-close', this.removeDetails);
       $('#jstree2').on('click.foo', '#' + nodeId + ' .jstree-details-confirm', () => {
-        var data = $(node).find('.jstree-details-text').val();
-        this.settings.details.confirm_fn(node, data, () => setTimeout(() => this.removeDetails(), 500))
+        var insertData = $(node).find('.jstree-details-input-text').val();
+        this.settings.details.confirm_fn(node, insertData)
       });
-
-      $('#' + nodeId + '_anchor').after('' +
-        '<div class="jstree-details-actions">' +
-        '<textarea class="jstree-details-text"></textarea>' +
-        '<button class="jstree-details-confirm">ok</button>' +
-        '<button class="jstree-details-close">close</button>' +
-        '</div>'
-      );
+      $('.jstree-details-input-text').on('keyup', (e) => {
+        e.stopPropagation();
+      });
     };
     // Todo make dynamic
 
     this.removeDetails = function () {
-      $('#jstree2').find('.jstree-details-actions').remove();
+      $('#jstree2').find('.jstree-details-container').remove();
       $('#jstree2 .jstree-details').removeClass('active');
       $('#jstree2').off('click.foo');
+      $('.jstree-details-input-text').off('keyup');
     };
 
     this.teardown = function () {
@@ -158,7 +155,7 @@
         }
         if(tmp) {
           const level = Number($(obj).attr('aria-level')) - 1;
-          $(obj).append("<span style='left:-" + (level * this.settings.numbering.liMarginLeft)  + "px;' class='"+className+"'>"+ org +"</span>");
+          $(obj).append("<span style='left:-" + (level * this.settings.numbering.liMarginLeft)  + "px; top: 30px;' class='"+className+"'>"+ org +"</span>");
         }
       }
 

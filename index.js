@@ -5,9 +5,15 @@ const flow_list = [
     "filters": {
       "labels": ["CRM", "Paid"],
     },
+    "targetNodeHTML": '' +
+      '<div class="target-list-title-container" style="display: none;">' +
+        '<span class="target-list-title-label">Query</span>' +
+        '<span class="target-list-title-title">Query</span>' +
+        '<span class="target-list-title-list">Product</span>' +
+      '</div>',
     "type": "flow",
-    "metadata": {
-      "someData": "Item data"
+    "data": {
+      "data": "Item data"
     }
   },
   {
@@ -17,8 +23,8 @@ const flow_list = [
       "labels": ["CRM", "Paid"],
     },
     "type": "flow",
-    "metadata": {
-      "someData": "Item data"
+    "data": {
+      "data": "Item data"
     }
   },
   {
@@ -28,8 +34,8 @@ const flow_list = [
       "labels": ["CRM", "Paid"],
     },
     "type": "flow",
-    "metadata": {
-      "someData": "Item data"
+    "data": {
+      "data": "Item data"
     }
   },
 ];
@@ -39,16 +45,16 @@ const conditions_list = [
     "text": "If",
     "iconMark": "If",
     "type": "condition",
-    "metadata": {
-      "someData": "conditions data"
+    "data": {
+      "data": "conditions data"
     }
   },
   {
     "text": "For",
     "iconMark": "Fo",
     "type": "condition",
-    "metadata": {
-      "someData": "conditions data"
+    "data": {
+      "data": "conditions data"
     }
   },
 ];
@@ -58,56 +64,56 @@ const actions_list = [
     "text": "Pull Data",
     "iconMark": "Q",
     "type": "action",
-    "metadata": {
-      "someData": "test data"
+    "data": {
+      "data": "test data"
     }
   },
   {
     "text": "New Query",
     "iconMark": "Q",
     "type": "action",
-    "metadata": {
-      "someData": "test data"
+    "data": {
+      "data": "test data"
     }
   },
   {
     "text": "API Data",
     "iconMark": "A",
     "type": "action",
-    "metadata": {
-      "someData": "test data"
+    "data": {
+      "data": "test data"
     }
   },
   {
     "text": "To Source",
     "iconMark": "S",
     "type": "action",
-    "metadata": {
-      "someData": "test data"
+    "data": {
+      "data": "test data"
     }
   },
   {
     "text": "To Target",
     "iconMark": "T",
     "type": "action",
-    "metadata": {
-      "someData": "test data"
+    "data": {
+      "data": "test data"
     }
   },
   {
     "text": "Map",
     "iconMark": "M",
     "type": "action",
-    "metadata": {
-      "someData": "test data"
+    "data": {
+      "data": "test data"
     }
   },
   {
     "text": "Join",
     "iconMark": "J",
     "type": "action",
-    "metadata": {
-      "someData": "test data"
+    "data": {
+      "data": "test data"
     }
   },
   {
@@ -115,7 +121,7 @@ const actions_list = [
     "iconMark": "R",
     "type": "action",
     "data": {
-      "someData": "test data"
+      "data": "test data"
     }
   },
 ];
@@ -141,7 +147,7 @@ function prepareNodes(dataList) {
 
   const updatedList = dataList.map((item) => {
     const randomClassName = getRandomClass(bgClassList);
-    let { text, iconMark, className, type, filters } = item;
+    let { text, iconMark, className, type, filters, targetNodeHTML } = item;
     let filterLabelsHtml = null;
     className = className ? className : randomClassName;
 
@@ -152,14 +158,16 @@ function prepareNodes(dataList) {
 
       return {
         ...item,
-        text: `<span class='title-icon ${className}'>${iconMark}</span><div class='title'>${text}</div>`
+        text: `
+            <span class='title-icon ${className}'>${iconMark}</span><div class='title'>${text}</div>
+            ${targetNodeHTML ? targetNodeHTML : ''}`
       };
     }
 
     if (filters && filters.labels) {
       const filtersHTMLList = filters.labels.map((label) => {
         const color = getColorByKey(label, filtersColorMap);
-        return `<span class="${getRandomClass(bgClassList)}" style="border: 1px solid ${color}; color: ${color}; border-radius: 3px;">${label}</span>`
+        return `<span style="border: 1px solid ${color}; color: ${color}; border-radius: 3px;">${label}</span>`
       });
       filterLabelsHtml = filters.labels.length && `<div class="title-filters" >${filtersHTMLList.join('')}</div>`;
     }
@@ -173,8 +181,9 @@ function prepareNodes(dataList) {
             </span>
             <div class="title-container">
                 <span class="title">${text}</span>
-                ${filterLabelsHtml && filterLabelsHtml}
+                ${filterLabelsHtml ? filterLabelsHtml : ''}
             </div>
+            ${targetNodeHTML ? targetNodeHTML : ''}
         </div>`
     };
   });
@@ -185,8 +194,7 @@ function prepareNodes(dataList) {
 
 $('#actions_list').jstree({
   'core': {
-    'check_callback': function (oporation) {
-      var isChangePosition = oporation === 'move_node' || oporation === 'copy_node';
+    'check_callback': function (oporation) {var isChangePosition = oporation === 'move_node' || oporation === 'copy_node';
 
       if(isChangePosition){
         return false;
@@ -278,17 +286,20 @@ $('#jstree2').jstree({
     'data': []
   },
   "numbering": {
-    "liMarginLeft": 24
+    "liMarginLeft": 48
   },
   "themes": {
     "icons": false
   },
   "details": {
-    "confirm_fn": function (node, data, callback) {
+    "confirm_fn": function (node, data) {
       // TODO add callback
 
       console.log(node, data, 'Callbak Data')
-      callback && callback();
+      if (data && data.length) {
+        alert(data)
+        setTimeout(() => $('#jstree2').jstree(true).removeDetails(), 500)
+      }
     }
   },
   "types": {
@@ -353,9 +364,6 @@ $('#jstree2').jstree({
       }
     }
   },
-  "dnd" :{
-    "large_drag_target": true
-  },
   "plugins": [
     "dnd",
     "types",
@@ -388,15 +396,15 @@ $('#jstree2').on('changed.jstree', () => {
 });
 
 $('#jstree2').on('copy_node.jstree', (e, data) => {
-  data.node.metadata = $.extend(true, {}, data.original.metadata);
+  data.node.data = $.extend(true, {}, data.original.data);
   $('#jstree2').jstree(true).redraw(true);
 });
 
 //open close by click on item
 $('#jstree2').on('select_node.jstree', function (e, data) {
   const { node } = data;
-
-  if (!node.state.opened) {
+  console.log(e.target);
+  if (!node.state.opened && node.children.length) {
     $('#jstree2').jstree(true).open_node(node, true);
     return;
   }
