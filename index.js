@@ -194,6 +194,9 @@ $('#actions_list').jstree({
     },
     'data': prepareNodes(actions_list),
   },
+  "themes": {
+    "icons": false
+  },
   "types": {
     "default": {
       "icon" : false
@@ -219,6 +222,9 @@ $('#condition_list').jstree({
     },
     'data': prepareNodes(conditions_list),
   },
+  "themes": {
+    "icons": false
+  },
   "types": {
     "default": {
       "icon" : false
@@ -243,6 +249,9 @@ $('#flows_list').jstree({
       }
     },
     'data': prepareNodes(flow_list),
+  },
+  "themes": {
+    "icons": false
   },
   "types": {
     "default": {
@@ -270,6 +279,9 @@ $('#jstree2').jstree({
   },
   "numbering": {
     "liMarginLeft": 24
+  },
+  "themes": {
+    "icons": false
   },
   "details": {
     "confirm_fn": function (node, data, callback) {
@@ -341,6 +353,9 @@ $('#jstree2').jstree({
       }
     }
   },
+  "dnd" :{
+    "large_drag_target": true
+  },
   "plugins": [
     "dnd",
     "types",
@@ -375,6 +390,18 @@ $('#jstree2').on('changed.jstree', () => {
 $('#jstree2').on('copy_node.jstree', (e, data) => {
   data.node.metadata = $.extend(true, {}, data.original.metadata);
   $('#jstree2').jstree(true).redraw(true);
+});
+
+//open close by click on item
+$('#jstree2').on('select_node.jstree', function (e, data) {
+  const { node } = data;
+
+  if (!node.state.opened) {
+    $('#jstree2').jstree(true).open_node(node, true);
+    return;
+  }
+
+  $('#jstree2').jstree(true).close_node(node);
 });
 
 
