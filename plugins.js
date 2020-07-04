@@ -6,7 +6,7 @@
       parent.bind.call(this);
       this.element
         .on("click.jstree", ".jstree-custom-context-menu", $.proxy(function (e) {
-          e.stopImmediatePropagation();
+          e.preventDefault();
 
           var node = this.get_node(e.target);
           var position = $(e.target).offset();
@@ -27,7 +27,7 @@
       obj = parent.redraw_node.call(this, obj, deep, callback, force_draw);
       if(obj) {
         var tmp = '<div class="jstree-custom-context-menu"><span>...</span></div>';
-        $(obj).find('.jstree-anchor').append($(tmp));
+        $(obj).append($(tmp));
       }
       return obj;
     };
@@ -44,30 +44,32 @@
       parent.bind.call(this);
       this.element
         .on("click.jstree", ".jstree-details", $.proxy(function (e) {
-          var isOpenedDetails = $(e.target).hasClass('active');
+          var node = this.get_node(e.target);
+          const { isOpenDetails = false } = node.state;
 
           e.stopImmediatePropagation();
-          if (isOpenedDetails) {
+
+          if (isOpenDetails) {
             e.preventDefault();
             return;
           }
 
-          this.removeDetails();
-
-          $(e.target).addClass('active');
-
-          var node = this.get_node(e.target);
           this.settings.details.confirm_fn.bind(this, node);
-          this.append_detais(node)
+          node.state = {
+            ...node.state,
+            isOpenDetails: true,
+          };
+          this._append_details(node)
         }, this));
     };
 
-    this.append_detais = function (node) {
+    this._append_details = function (node, nodeDOM) {
 
-      var node = this.get_node(node, true);
-      var nodeId = $(node).attr('id');
+      if (!nodeDOM) {
+        nodeDOM = this.get_node(node, true);
+      }
 
-      $('#' + nodeId + '_anchor').after('' +
+      $(nodeDOM).find('.jstree-anchor').after('' +
         '<div class="jstree-details-container">' +
           '<div class="jstree-details-input">' +
             '<span class="jstree-details-input-label">Details</span>' +
@@ -79,39 +81,58 @@
           '</div>'+
         '</div>'
       );
+      this._addDetailsListeners(node, nodeDOM);
 
-      $('#jstree2').on('click.foo', '#' + nodeId + ' .jstree-details-close', this.removeDetails);
-      $('#jstree2').on('click.foo', '#' + nodeId + ' .jstree-details-confirm', () => {
-        var insertData = $(node).find('.jstree-details-input-text').val();
+      return nodeDOM;
+    };
+
+    this._addDetailsListeners = function (node, nodeDOM) {
+      const selectorId = `#${node.id}`;
+
+      $('#jstree2').on('click.foo', `${selectorId} .jstree-details-close`, () => this._removeDetails(node));
+      $('#jstree2').on('click.foo', `${selectorId} .jstree-details-confirm`, () => {
+        var insertData = $(nodeDOM).find('.jstree-details-input-text').val();
         this.settings.details.confirm_fn(node, insertData)
       });
       $('.jstree-details-input-text').on('keyup', (e) => {
         e.stopPropagation();
       });
     };
-    // Todo make dynamic
 
-    this.removeDetails = function () {
-      $('#jstree2').find('.jstree-details-container').remove();
-      $('#jstree2 .jstree-details').removeClass('active');
-      $('#jstree2').off('click.foo');
-      $('.jstree-details-input-text').off('keyup');
+    this._removeDetails = function (node) {
+      const nodeDom  = this.get_node(node, true);
+      $(nodeDom).find('.jstree-details-container').remove();
+      $(nodeDom).find('.jstree-details-input-text').off('keyup');
+
+      $(nodeDom).off('click.foo');
+      node.state = {
+        ...node.state,
+        isOpenDetails: false,
+      }
     };
 
     this.teardown = function () {
       if(this.settings.details) {
-        this.element.find(".jstree-details").remove();
+        this.element.find(".jstree-details-container").remove();
       }
       parent.teardown.call(this);
     };
 
+    this.redraw_node = function(nodeDom, deep, callback, force_draw) {
+      nodeDom = parent.redraw_node.call(this, nodeDom, deep, callback, force_draw);
 
-    this.redraw_node = function(obj, deep, callback, force_draw) {
-      obj = parent.redraw_node.call(this, obj, deep, callback, force_draw);
-      if(obj) {
-        $(obj).append($('<i class="jstree-details fa fa-info-circle"></i>'));
+      const node = this.get_node(nodeDom);
+      const { isOpenDetails } = node.state;
+
+      // TODO fix issue with excess details
+      if(nodeDom) {
+        $(nodeDom).append($('<i class="jstree-details fa fa-info-circle"></i>'));
+        if(isOpenDetails) {
+          nodeDom = this._append_details(node, nodeDom);
+        }
       }
-      return obj;
+
+      return nodeDom;
     };
   };
 })(jQuery);

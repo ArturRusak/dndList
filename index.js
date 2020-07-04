@@ -277,12 +277,8 @@ $('#flows_list').jstree({
 
 $('#jstree2').jstree({
   'core': {
-    'check_callback': function (op, node, par, pos, more) {
-      if((op === "move_node" || op === "copy_node") && more && more.dnd) {
-        console.log('MOUSE')
-        // use more.pos to update your own marker
-      }
-    },
+    'animation': 200,
+    'check_callback': true,
     'data': []
   },
   "numbering": {
@@ -293,12 +289,11 @@ $('#jstree2').jstree({
   },
   "details": {
     "confirm_fn": function (node, data) {
-      // TODO add callback
 
-      console.log(node, data, 'Callbak Data')
+      console.log(data, 'Callbak Data')
       if (data && data.length) {
-        alert(data)
-        setTimeout(() => $('#jstree2').jstree(true).removeDetails(), 500)
+        alert(`iD -> ${node.id}; Message: ${data}`);
+        setTimeout(() => $('#jstree2').jstree(true).removeDetails(node), 500)
       }
     }
   },
@@ -403,13 +398,14 @@ $('#jstree2').on('copy_node.jstree', (e, data) => {
 //open close by click on item
 $('#jstree2').on('select_node.jstree', function (e, data) {
   const { node } = data;
-  console.log(e.target);
-  if (!node.state.opened && node.children.length) {
-    $('#jstree2').jstree(true).open_node(node, true);
-    return;
-  }
+  const isClickByLink = $(data.event.currentTarget).hasClass('jstree-anchor');
 
-  $('#jstree2').jstree(true).close_node(node);
+  if (!node.state.opened && node.children.length && isClickByLink) {
+    data.instance.open_node(node, () => {}, 500);
+    return;
+  } else if (isClickByLink) {
+    data.instance.close_node(node, true);
+  }
 });
 
 
