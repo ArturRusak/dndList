@@ -47,7 +47,7 @@
           var node = this.get_node(e.target);
           const { isOpenDetails = false } = node.state;
 
-          e.stopImmediatePropagation();
+          e.stopPropagation();
 
           if (isOpenDetails) {
             e.preventDefault();
@@ -101,6 +101,7 @@
 
     this._removeDetails = function (node) {
       const nodeDom  = this.get_node(node, true);
+      console.log(nodeDom)
       $(nodeDom).find('.jstree-details-container').remove();
       $(nodeDom).find('.jstree-details-input-text').off('keyup');
 
