@@ -168,8 +168,73 @@ html * {
   border: 2px solid #ececec;
   border-radius: 3px;
 
+  .jstree-children {
+    position: relative;
+
+    &:before {
+      content: '';
+      top: 0;
+      left: 16px;
+      position: absolute;
+      display: block;
+      width: 1px;
+      height: calc(100% + 30px);
+      background: #bdbdbd;
+    }
+
+    &:after {
+      content: '';
+      z-index: 1;
+      left: 11px;
+      bottom: -33px;
+      position: absolute;
+      display: block;
+      width: 10px;
+      height: 10px;
+      background: url("./assets/images/svg/arrow.svg") bottom center no-repeat;
+      background-size: contain;
+    }
+
+
+    &.jstree-container-ul {
+      padding-bottom: 30px;
+
+      &:after, &:before,
+      > .jstree-node:first-child:after,
+      > .jstree-node:first-child:before {
+        display: none;
+      }
+
+      > .jstree-node:first-child {
+        padding-top: 30px;
+      }
+    }
+  }
+
   .jstree-node {
-    padding-left: 24px;
+    padding-left: 42px;
+    background-image: none;
+
+    &:before {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 30px;
+      margin-left: 16px;
+      background: #bdbdbd;
+    }
+
+    &:after {
+      content: '';
+      top: 23px;
+      left: 53px;
+      position: absolute;
+      display: block;
+      width: 10px;
+      height: 10px;
+      background: url("./assets/images/svg/arrow.svg") bottom center no-repeat;
+      background-size: contain;
+    }
 
     .jstree-anchor {
       display: flex;
@@ -180,10 +245,32 @@ html * {
       box-shadow: 2px 2px 2px #dadada;
       border-radius: 5px;
     }
+
+    &.jstree-open {
+      > .jstree-icon {
+        transform: rotate(-90deg);
+      }
+    }
+
+    &.jstree-leaf {
+      > .jstree-icon {
+        background-image: none;
+      }
+    }
+
+    .jstree-icon {
+      position: absolute;
+      top: 30px;
+      left: 15px;
+      background-image: url("./assets/images/svg/menu.svg");
+      background-size: 17px;
+      background-position: center center;
+      transition: all 0.2s ease-out;
+    }
   }
 
   .jstree-custom-context-menu {
-    top: 32px;
+    top: 37px;
     right: 0.5em;
     position: absolute;
     display: inline-flex;
@@ -207,7 +294,7 @@ html * {
 
   .jstree-details {
     position: absolute;
-    top: 29px;
+    top: 34px;
     right: 45px;
     padding: 5px;
     cursor: pointer;

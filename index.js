@@ -282,7 +282,7 @@ $('#jstree2').jstree({
     'data': []
   },
   "numbering": {
-    "liMarginLeft": 48
+    "liMarginLeft": 66
   },
   "themes": {
     "icons": false
