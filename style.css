@@ -28,7 +28,7 @@ html * {
 
 .source-lists,
 .jstree-anchor {
-  background: #ececec;
+  background: #f5f5f5;
 }
 
 #actions_list .jstree-node,
@@ -44,6 +44,11 @@ html * {
 #flows_list .jstree-icon {
   display: none;
 }
+#actions_list .source-list-title-container,
+#condition_list .source-list-title-container,
+#flows_list .source-list-title-container {
+  display: flex;
+}
 
 #actions_list > .jstree-container-ul,
 #condition_list > .jstree-container-ul {
@@ -52,7 +57,12 @@ html * {
   flex-wrap: wrap;
   max-width: 300px;
 }
-
+#actions_list .source-list-title-container,
+#condition_list .source-list-title-container {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 #actions_list .jstree-anchor,
 #condition_list .jstree-anchor {
   display: flex;
@@ -154,6 +164,29 @@ html * {
   border: 2px solid #ececec;
   border-radius: 3px;
 }
+#jstree2 .source-list-title-container {
+  display: none;
+}
+#jstree2 .target-list-title-container {
+  display: flex !important;
+  align-items: center;
+}
+#jstree2 .target-list-title-container > * {
+  margin-right: 15px;
+}
+#jstree2 .target-list-title-container > *:last-child {
+  margin: 0;
+}
+#jstree2 .target-list-title-container .target-list-title-label {
+  padding: 4px 8px;
+  color: #fff;
+}
+#jstree2 .target-list-title-container .target-list-title-item {
+  padding: 4px 8px;
+  font-size: 14px;
+  border: 2px solid #dadada;
+  border-radius: 3px;
+}
 #jstree2 .jstree-children {
   position: relative;
 }
@@ -218,8 +251,8 @@ html * {
   height: auto;
   padding: 8px 8px;
   line-height: 1.2em;
-  background: #ececec;
-  box-shadow: 2px 2px 2px #dadada;
+  background: #f5f5f5;
+  box-shadow: 2px 2px 2px #dadadada;
   border-radius: 5px;
 }
 #jstree2 .jstree-node.jstree-open > .jstree-icon {
@@ -306,6 +339,40 @@ html * {
 }
 #jstree2 .jstree-details-container .jstree-details-actions button:hover {
   color: #000000;
+}
+
+#vakata-dnd .jstree-copy {
+  display: none !important;
+}
+#vakata-dnd .title-wrapper {
+  display: flex !important;
+  padding: 4px 10px;
+  background: #d3ffff;
+  border: 2px solid #4b72ff;
+  border-radius: 5px;
+}
+#vakata-dnd .title-wrapper .source-list-title-container {
+  display: none;
+}
+#vakata-dnd .title-wrapper .target-list-title-container {
+  display: flex !important;
+  align-items: center;
+}
+#vakata-dnd .title-wrapper .target-list-title-container > * {
+  margin-right: 15px;
+}
+#vakata-dnd .title-wrapper .target-list-title-container > *:last-child {
+  margin: 0;
+}
+#vakata-dnd .title-wrapper .target-list-title-container .target-list-title-label {
+  padding: 4px 8px;
+  color: #fff;
+}
+#vakata-dnd .title-wrapper .target-list-title-container .target-list-title-item {
+  padding: 4px 8px;
+  font-size: 14px;
+  border: 2px solid #dadada;
+  border-radius: 3px;
 }
 
 .custom-tabs .nav-item:last-child .nav-link {

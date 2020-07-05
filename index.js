@@ -7,9 +7,9 @@ const flow_list = [
     },
     "targetNodeHTML": '' +
       '<div class="target-list-title-container" style="display: none;">' +
-        '<span class="target-list-title-label">Query</span>' +
+        '<span class="target-list-title-label red-bg">Query</span>' +
         '<span class="target-list-title-title">Query</span>' +
-        '<span class="target-list-title-list">Product</span>' +
+        '<span class="target-list-title-item">Product</span>' +
       '</div>',
     "type": "flow",
     "data": {
@@ -22,6 +22,14 @@ const flow_list = [
     "filters": {
       "labels": ["CRM", "Paid"],
     },
+    "targetNodeHTML": '' +
+      '<div class="target-list-title-container" style="display: none;">' +
+      '<span class="target-list-title-label red-bg">Item 2</span>' +
+      '<span class="target-list-title-title">Query</span>' +
+      '<span class="target-list-title-item">Product</span>' +
+      '<span class="target-list-title-title">Query</span>' +
+      '<span class="target-list-title-item">Product</span>' +
+      '</div>',
     "type": "flow",
     "data": {
       "data": "Item data"
@@ -33,6 +41,14 @@ const flow_list = [
     "filters": {
       "labels": ["CRM", "Paid"],
     },
+    "targetNodeHTML": '' +
+      '<div class="target-list-title-container" style="display: none;">' +
+      '<span class="target-list-title-label red-bg">Workflow</span>' +
+      '<span class="target-list-title-title">Test</span>' +
+      '<span class="target-list-title-item">Product</span>' +
+      '<span class="target-list-title-title">Query</span>' +
+      '<span class="target-list-title-item">Product</span>' +
+      '</div>',
     "type": "flow",
     "data": {
       "data": "Item data"
@@ -44,6 +60,14 @@ const conditions_list = [
   {
     "text": "If",
     "iconMark": "If",
+    "targetNodeHTML": '' +
+      '<div class="target-list-title-container" style="display: none;">' +
+      '<span class="target-list-title-label salad-bg">Workflow</span>' +
+      '<span class="target-list-title-title">Test</span>' +
+      '<span class="target-list-title-item">Product</span>' +
+      '<span class="target-list-title-title">Query</span>' +
+      '<span class="target-list-title-item">Product</span>' +
+      '</div>',
     "type": "condition",
     "data": {
       "data": "conditions data"
@@ -52,6 +76,14 @@ const conditions_list = [
   {
     "text": "For",
     "iconMark": "Fo",
+    "targetNodeHTML": '' +
+      '<div class="target-list-title-container" style="display: none;">' +
+      '<span class="target-list-title-label blue-bg">Workflow</span>' +
+      '<span class="target-list-title-title">Test</span>' +
+      '<span class="target-list-title-item">Product</span>' +
+      '<span class="target-list-title-title">Query</span>' +
+      '<span class="target-list-title-item">Product</span>' +
+      '</div>',
     "type": "condition",
     "data": {
       "data": "conditions data"
@@ -63,6 +95,14 @@ const actions_list = [
   {
     "text": "Pull Data",
     "iconMark": "Q",
+    "targetNodeHTML": '' +
+      '<div class="target-list-title-container" style="display: none;">' +
+      '<span class="target-list-title-label blue-bg">Workflow</span>' +
+      '<span class="target-list-title-title">Test</span>' +
+      '<span class="target-list-title-item">Product</span>' +
+      '<span class="target-list-title-title">Query</span>' +
+      '<span class="target-list-title-item">Product</span>' +
+      '</div>',
     "type": "action",
     "data": {
       "data": "test data"
@@ -71,6 +111,14 @@ const actions_list = [
   {
     "text": "New Query",
     "iconMark": "Q",
+    "targetNodeHTML": '' +
+      '<div class="target-list-title-container" style="display: none;">' +
+      '<span class="target-list-title-label blue-bg">Workflow</span>' +
+      '<span class="target-list-title-title">Test</span>' +
+      '<span class="target-list-title-item">Product</span>' +
+      '<span class="target-list-title-title">Query</span>' +
+      '<span class="target-list-title-item">Product</span>' +
+      '</div>',
     "type": "action",
     "data": {
       "data": "test data"
@@ -79,6 +127,14 @@ const actions_list = [
   {
     "text": "API Data",
     "iconMark": "A",
+    "targetNodeHTML": '' +
+      '<div class="target-list-title-container" style="display: none;">' +
+      '<span class="target-list-title-label blue-bg">Workflow</span>' +
+      '<span class="target-list-title-title">Test</span>' +
+      '<span class="target-list-title-item">Product</span>' +
+      '<span class="target-list-title-title">Query</span>' +
+      '<span class="target-list-title-item">Product</span>' +
+      '</div>',
     "type": "action",
     "data": {
       "data": "test data"
@@ -87,6 +143,14 @@ const actions_list = [
   {
     "text": "To Source",
     "iconMark": "S",
+    "targetNodeHTML": '' +
+      '<div class="target-list-title-container" style="display: none;">' +
+      '<span class="target-list-title-label blue-bg">Workflow</span>' +
+      '<span class="target-list-title-title">Test</span>' +
+      '<span class="target-list-title-item">Product</span>' +
+      '<span class="target-list-title-title">Query</span>' +
+      '<span class="target-list-title-item">Product</span>' +
+      '</div>',
     "type": "action",
     "data": {
       "data": "test data"
@@ -95,6 +159,14 @@ const actions_list = [
   {
     "text": "To Target",
     "iconMark": "T",
+    "targetNodeHTML": '' +
+      '<div class="target-list-title-container" style="display: none;">' +
+      '<span class="target-list-title-label blue-bg">Workflow</span>' +
+      '<span class="target-list-title-title">Test</span>' +
+      '<span class="target-list-title-item">Product</span>' +
+      '<span class="target-list-title-title">Query</span>' +
+      '<span class="target-list-title-item">Product</span>' +
+      '</div>',
     "type": "action",
     "data": {
       "data": "test data"
@@ -103,6 +175,14 @@ const actions_list = [
   {
     "text": "Map",
     "iconMark": "M",
+    "targetNodeHTML": '' +
+      '<div class="target-list-title-container" style="display: none;">' +
+      '<span class="target-list-title-label blue-bg">Workflow</span>' +
+      '<span class="target-list-title-title">Test</span>' +
+      '<span class="target-list-title-item">Product</span>' +
+      '<span class="target-list-title-title">Query</span>' +
+      '<span class="target-list-title-item">Product</span>' +
+      '</div>',
     "type": "action",
     "data": {
       "data": "test data"
@@ -111,6 +191,14 @@ const actions_list = [
   {
     "text": "Join",
     "iconMark": "J",
+    "targetNodeHTML": '' +
+      '<div class="target-list-title-container" style="display: none;">' +
+      '<span class="target-list-title-label blue-bg">Workflow</span>' +
+      '<span class="target-list-title-title">Test</span>' +
+      '<span class="target-list-title-item">Product</span>' +
+      '<span class="target-list-title-title">Query</span>' +
+      '<span class="target-list-title-item">Product</span>' +
+      '</div>',
     "type": "action",
     "data": {
       "data": "test data"
@@ -119,6 +207,14 @@ const actions_list = [
   {
     "text": "Replicate",
     "iconMark": "R",
+    "targetNodeHTML": '' +
+      '<div class="target-list-title-container" style="display: none;">' +
+      '<span class="target-list-title-label blue-bg">Workflow</span>' +
+      '<span class="target-list-title-title">Test</span>' +
+      '<span class="target-list-title-item">Product</span>' +
+      '<span class="target-list-title-title">Query</span>' +
+      '<span class="target-list-title-item">Product</span>' +
+      '</div>',
     "type": "action",
     "data": {
       "data": "test data"
@@ -159,8 +255,13 @@ function prepareNodes(dataList) {
       return {
         ...item,
         text: `
-            <span class='title-icon ${className}'>${iconMark}</span><div class='title'>${text}</div>
-            ${targetNodeHTML ? targetNodeHTML : ''}`
+            <div class="title-wrapper">
+              <div class="source-list-title-container">
+                <span class='title-icon ${className}'>${iconMark}</span><div class='title'>${text}</div>
+              </div>
+              ${targetNodeHTML ? targetNodeHTML : ''}
+            </div>
+            `
       };
     }
 
@@ -176,12 +277,14 @@ function prepareNodes(dataList) {
       ...item,
       text: `
         <div class="title-wrapper">
-            <span class='title-icon ${className}'>
-                ${iconMark}
-            </span>
-            <div class="title-container">
-                <span class="title">${text}</span>
-                ${filterLabelsHtml ? filterLabelsHtml : ''}
+            <div class="source-list-title-container">
+               <span class='title-icon ${className}'>
+                    ${iconMark}
+                </span>
+                <div class="title-container">
+                    <span class="title">${text}</span>
+                        ${filterLabelsHtml ? filterLabelsHtml : ''}
+                </div>
             </div>
             ${targetNodeHTML ? targetNodeHTML : ''}
         </div>`
@@ -194,6 +297,9 @@ function prepareNodes(dataList) {
 
 $('#actions_list').jstree({
   'core': {
+    'theme': {
+      "responsive": true,
+    },
     'check_callback': function (oporation) {var isChangePosition = oporation === 'move_node' || oporation === 'copy_node';
 
       if(isChangePosition){
@@ -221,6 +327,9 @@ $('#actions_list').jstree({
 
 $('#condition_list').jstree({
   'core': {
+    'theme': {
+      "responsive": true,
+    },
     'check_callback': function (oporation) {
       var isChangePosition = oporation === 'move_node' || oporation === 'copy_node';
 
@@ -249,6 +358,9 @@ $('#condition_list').jstree({
 
 $('#flows_list').jstree({
   'core': {
+    'theme': {
+      "responsive": true,
+    },
     'check_callback': function (oporation) {
       var isChangePosition = oporation === 'move_node' || oporation === 'copy_node';
 
@@ -278,6 +390,9 @@ $('#flows_list').jstree({
 $('#jstree2').jstree({
   'core': {
     'animation': 200,
+    'theme': {
+      "responsive": true,
+    },
     'check_callback': true,
     'data': []
   },
@@ -289,8 +404,6 @@ $('#jstree2').jstree({
   },
   "details": {
     "confirm_fn": function (node, data) {
-
-      console.log(data, 'Callbak Data')
       if (data && data.length) {
         alert(`iD -> ${node.id}; Message: ${data}`);
         setTimeout(() => $('#jstree2').jstree(true).removeDetails(node), 500)
@@ -384,6 +497,10 @@ function removeTree(id) {
 $(document).on("click", () => {
  console.log($('#jstree2').jstree(true).get_json("#", {flat: true}));
 
+});
+
+$(document).on("dnd_start.vakata", (data, element, helper) => {
+  console.log(data, element.helper)
 });
 
 $('#jstree2').on('changed.jstree', () => {
