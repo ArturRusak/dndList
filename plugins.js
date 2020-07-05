@@ -54,11 +54,6 @@
             return;
           }
 
-          this.settings.details.confirm_fn.bind(this, node);
-          node.state = {
-            ...node.state,
-            isOpenDetails: true,
-          };
           this._append_details(node)
         }, this));
     };
@@ -69,7 +64,15 @@
         nodeDOM = this.get_node(node, true);
       }
 
-      $(nodeDOM).find('.jstree-anchor').after('' +
+      node.state = {
+        ...node.state,
+        isOpenDetails: true,
+      };
+
+      this.settings.details.confirm_fn.bind(this, node);
+
+
+      $(nodeDOM).find('> .jstree-anchor').after('' +
         '<div class="jstree-details-container">' +
           '<div class="jstree-details-input">' +
             '<span class="jstree-details-input-label">Details</span>' +
@@ -89,8 +92,8 @@
     this._addDetailsListeners = function (node, nodeDOM) {
       const selectorId = `#${node.id}`;
 
-      $('#jstree2').on('click.foo', `${selectorId} .jstree-details-close`, () => this._removeDetails(node));
-      $('#jstree2').on('click.foo', `${selectorId} .jstree-details-confirm`, () => {
+      $(selectorId).on('click.foo', `> .jstree-details-container .jstree-details-close`, (e) => this._removeDetails(e, node));
+      $(selectorId).on('click.foo', `> .jstree-details-container .jstree-details-confirm`, () => {
         var insertData = $(nodeDOM).find('.jstree-details-input-text').val();
         this.settings.details.confirm_fn(node, insertData)
       });
@@ -99,11 +102,13 @@
       });
     };
 
-    this._removeDetails = function (node) {
+    this._removeDetails = function (event, node) {
+      event.stopPropagation();
+
       const nodeDom  = this.get_node(node, true);
-      console.log(nodeDom)
-      $(nodeDom).find('.jstree-details-container').remove();
-      $(nodeDom).find('.jstree-details-input-text').off('keyup');
+
+      $(nodeDom).find('> .jstree-details-container').remove();
+      $(nodeDom).find('> .jstree-details-input-text').off('keyup');
 
       $(nodeDom).off('click.foo');
       node.state = {
@@ -123,9 +128,12 @@
       nodeDom = parent.redraw_node.call(this, nodeDom, deep, callback, force_draw);
 
       const node = this.get_node(nodeDom);
-      const { isOpenDetails } = node.state;
+      let isOpenDetails = null;
 
-      // TODO fix issue with excess details
+      if (node.state) {
+        isOpenDetails = node.state.isOpenDetails
+      }
+
       if(nodeDom) {
         $(nodeDom).append($('<i class="jstree-details fa fa-info-circle"></i>'));
         if(isOpenDetails) {

@@ -406,7 +406,6 @@ $('#jstree2').jstree({
     "confirm_fn": function (node, data) {
       if (data && data.length) {
         alert(`iD -> ${node.id}; Message: ${data}`);
-        setTimeout(() => $('#jstree2').jstree(true).removeDetails(node), 500)
       }
     }
   },
