@@ -42,6 +42,14 @@
         </ul>
         <div class="custom-tab-content tab-content pt-3" id="myTabContent">
             <div class="tab-pane fade active show" id="actions" role="tabpanel" aria-labelledby="actions-tab">
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-search form-control-feedback"></i>
+                            </span>
+                    </div>
+                    <input id="search1" type="text" class="form-control" placeholder="Search">
+                </div>
                 <div class="col-12 mb-2 overflow-auto">
                     <a
                         class="collapse-link border-0"
@@ -52,7 +60,7 @@
                     >
                         Actions
                     </a>
-                    <div id="actions_list" class="collapse show">Actions list</div>
+                    <div id="actions_list" class="collapse show"></div>
                 </div>
                 <div class="col-12 overflow-auto">
                     <a
@@ -68,17 +76,24 @@
                 </div>
             </div>
             <div class="tab-pane fade" id="flows" role="tabpanel" aria-labelledby="flows-tab">
-                <div id="flows_list">FLOWS</div>
+                <div class="input-group mb-4">
+                    <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-search form-control-feedback"></i>
+                            </span>
+                    </div>
+                    <input id="search2" type="text" class="form-control" placeholder="Search">
+                </div>
+                <div id="flows_list"></div>
             </div>
         </div>
-
     </div>
     <div class="col-8 col-xl-9 py-3 px-4 target-list">
         <div class="row">
             <div class="col-12 col-md-7">
                 <div class="mb-3 d-flex justify-content-end">
-                    <button class="btn btn-primary mr-3" onclick="removeTree('#target_flow_list')">clear flow</button>
-                    <button class="btn btn-primary" onclick="getJsonData('#target_flow_list')">Log tree to console</button>
+                    <button class="btn btn-light mr-3" onclick="removeTree('#target_flow_list')">clear flow</button>
+                    <button class="btn btn-light" onclick="getJsonData('#target_flow_list')">Log tree to console</button>
                 </div>
                 <div class="py-3 px-4" id="target_flow_list"></div>
             </div>

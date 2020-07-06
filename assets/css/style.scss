@@ -47,10 +47,21 @@ html * {
   }
 
   > * {
-    height: 90vh;
+    min-height: 90vh;
   }
   .tab-pane > div {
     max-height: 38vh;
+  }
+
+  .input-group {
+    .input-group-text {
+      background-color: #fdfdfd;
+      border-right: none;
+    }
+
+    input {
+      border-left: none;
+    }
   }
 }
 
