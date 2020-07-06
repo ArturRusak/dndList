@@ -498,10 +498,6 @@ $(document).on("click", () => {
 
 });
 
-$(document).on("dnd_start.vakata", (data, element, helper) => {
-  console.log(data, element.helper)
-});
-
 $('#target_flow_list').on('changed.jstree', () => {
   $('#target_flow_list').jstree(true).redraw(true);
 });
