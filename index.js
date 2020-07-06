@@ -387,7 +387,7 @@ $('#flows_list').jstree({
   "plugins": ["dnd", "unique", "changed", "types"]
 });
 
-$('#jstree2').jstree({
+$('#target_flow_list').jstree({
   'core': {
     'animation': 200,
     'theme': {
@@ -494,7 +494,7 @@ function removeTree(id) {
 }
 
 $(document).on("click", () => {
- console.log($('#jstree2').jstree(true).get_json("#", {flat: true}));
+ console.log($('#target_flow_list').jstree(true).get_json("#", {flat: true}));
 
 });
 
@@ -502,17 +502,17 @@ $(document).on("dnd_start.vakata", (data, element, helper) => {
   console.log(data, element.helper)
 });
 
-$('#jstree2').on('changed.jstree', () => {
-  $('#jstree2').jstree(true).redraw(true);
+$('#target_flow_list').on('changed.jstree', () => {
+  $('#target_flow_list').jstree(true).redraw(true);
 });
 
-$('#jstree2').on('copy_node.jstree', (e, data) => {
+$('#target_flow_list').on('copy_node.jstree', (e, data) => {
   data.node.data = $.extend(true, {}, data.original.data);
-  $('#jstree2').jstree(true).redraw(true);
+  $('#target_flow_list').jstree(true).redraw(true);
 });
 
 //open close by click on item
-$('#jstree2').on('select_node.jstree', function (e, data) {
+$('#target_flow_list').on('select_node.jstree', function (e, data) {
   const { node } = data;
   const isClickByLink = $(data.event.currentTarget).hasClass('jstree-anchor');
 

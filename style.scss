@@ -172,7 +172,7 @@ html * {
   }
 }
 
-#jstree2 {
+#target_flow_list {
   border: 2px solid #ececec;
   border-radius: 3px;
 
@@ -510,3 +510,14 @@ html * {
       }
     }
   }
+
+.jstree-node {
+  position: relative;
+}
+
+.jstree-numbering {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+

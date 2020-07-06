@@ -131,29 +131,29 @@ html * {
       #flows_list .jstree-anchor .title-filters > * > *:last-child {
         margin-right: 0; }
 
-#jstree2 {
+#target_flow_list {
   border: 2px solid #ececec;
   border-radius: 3px; }
-  #jstree2 .source-list-title-container {
+  #target_flow_list .source-list-title-container {
     display: none; }
-  #jstree2 .target-list-title-container {
+  #target_flow_list .target-list-title-container {
     display: flex !important;
     align-items: center; }
-    #jstree2 .target-list-title-container > * {
+    #target_flow_list .target-list-title-container > * {
       margin-right: 15px; }
-    #jstree2 .target-list-title-container > *:last-child {
+    #target_flow_list .target-list-title-container > *:last-child {
       margin: 0; }
-    #jstree2 .target-list-title-container .target-list-title-label {
+    #target_flow_list .target-list-title-container .target-list-title-label {
       padding: 4px 8px;
       color: #fff; }
-    #jstree2 .target-list-title-container .target-list-title-item {
+    #target_flow_list .target-list-title-container .target-list-title-item {
       padding: 4px 8px;
       font-size: 14px;
       border: 2px solid #dadada;
       border-radius: 3px; }
-  #jstree2 .jstree-children {
+  #target_flow_list .jstree-children {
     position: relative; }
-    #jstree2 .jstree-children:before {
+    #target_flow_list .jstree-children:before {
       content: '';
       top: 0;
       left: 16px;
@@ -162,7 +162,7 @@ html * {
       width: 1px;
       height: calc(100% + 30px);
       background: #bdbdbd; }
-    #jstree2 .jstree-children:after {
+    #target_flow_list .jstree-children:after {
       content: '';
       z-index: 1;
       left: 11px;
@@ -173,25 +173,25 @@ html * {
       height: 10px;
       background: url("./assets/images/svg/arrow.svg") bottom center no-repeat;
       background-size: contain; }
-    #jstree2 .jstree-children.jstree-container-ul {
+    #target_flow_list .jstree-children.jstree-container-ul {
       padding-bottom: 30px; }
-      #jstree2 .jstree-children.jstree-container-ul:after, #jstree2 .jstree-children.jstree-container-ul:before,
-      #jstree2 .jstree-children.jstree-container-ul > .jstree-node:first-child:after,
-      #jstree2 .jstree-children.jstree-container-ul > .jstree-node:first-child:before {
+      #target_flow_list .jstree-children.jstree-container-ul:after, #target_flow_list .jstree-children.jstree-container-ul:before,
+      #target_flow_list .jstree-children.jstree-container-ul > .jstree-node:first-child:after,
+      #target_flow_list .jstree-children.jstree-container-ul > .jstree-node:first-child:before {
         display: none; }
-      #jstree2 .jstree-children.jstree-container-ul > .jstree-node:first-child {
+      #target_flow_list .jstree-children.jstree-container-ul > .jstree-node:first-child {
         padding-top: 30px; }
-  #jstree2 .jstree-node {
+  #target_flow_list .jstree-node {
     padding-left: 42px;
     background-image: none; }
-    #jstree2 .jstree-node:before {
+    #target_flow_list .jstree-node:before {
       content: '';
       display: block;
       width: 1px;
       height: 30px;
       margin-left: 16px;
       background: #bdbdbd; }
-    #jstree2 .jstree-node:after {
+    #target_flow_list .jstree-node:after {
       content: '';
       top: 23px;
       left: 53px;
@@ -201,7 +201,7 @@ html * {
       height: 10px;
       background: url("./assets/images/svg/arrow.svg") bottom center no-repeat;
       background-size: contain; }
-    #jstree2 .jstree-node .jstree-anchor {
+    #target_flow_list .jstree-node .jstree-anchor {
       display: flex;
       height: auto;
       padding: 8px 8px;
@@ -209,11 +209,11 @@ html * {
       background: #f5f5f5;
       box-shadow: 2px 2px 2px #dadadada;
       border-radius: 5px; }
-    #jstree2 .jstree-node.jstree-open > .jstree-icon {
+    #target_flow_list .jstree-node.jstree-open > .jstree-icon {
       transform: rotate(-90deg); }
-    #jstree2 .jstree-node.jstree-leaf > .jstree-icon {
+    #target_flow_list .jstree-node.jstree-leaf > .jstree-icon {
       background-image: none; }
-    #jstree2 .jstree-node .jstree-icon {
+    #target_flow_list .jstree-node .jstree-icon {
       position: absolute;
       top: 30px;
       left: 15px;
@@ -221,7 +221,7 @@ html * {
       background-size: 17px;
       background-position: center center;
       transition: all 0.2s ease-out; }
-  #jstree2 .jstree-custom-context-menu {
+  #target_flow_list .jstree-custom-context-menu {
     top: 37px;
     right: 0.5em;
     position: absolute;
@@ -237,22 +237,22 @@ html * {
     border: 1px solid #dadada;
     border-radius: 4px;
     cursor: pointer; }
-    #jstree2 .jstree-custom-context-menu span {
+    #target_flow_list .jstree-custom-context-menu span {
       position: relative;
       bottom: 5px; }
-  #jstree2 .jstree-details {
+  #target_flow_list .jstree-details {
     position: absolute;
     top: 34px;
     right: 45px;
     padding: 5px;
     cursor: pointer;
     color: #5c9fd9; }
-  #jstree2 .jstree-details-container {
+  #target_flow_list .jstree-details-container {
     margin-top: 20px; }
-    #jstree2 .jstree-details-container .jstree-details-input {
+    #target_flow_list .jstree-details-container .jstree-details-input {
       position: relative;
       margin-bottom: 5px; }
-      #jstree2 .jstree-details-container .jstree-details-input .jstree-details-input-label {
+      #target_flow_list .jstree-details-container .jstree-details-input .jstree-details-input-label {
         top: -10px;
         left: 30px;
         position: absolute;
@@ -260,16 +260,16 @@ html * {
         font-size: 16px;
         color: #808080;
         background: #fff; }
-      #jstree2 .jstree-details-container .jstree-details-input textarea {
+      #target_flow_list .jstree-details-container .jstree-details-input textarea {
         width: 100%;
         padding: 1em;
         border: 1px solid #808080;
         border-radius: 5px; }
-    #jstree2 .jstree-details-container .jstree-details-actions {
+    #target_flow_list .jstree-details-container .jstree-details-actions {
       display: flex;
       align-items: center;
       justify-content: flex-end; }
-      #jstree2 .jstree-details-container .jstree-details-actions button {
+      #target_flow_list .jstree-details-container .jstree-details-actions button {
         font-size: 18px;
         line-height: 14px;
         margin-right: 3px;
@@ -277,9 +277,9 @@ html * {
         background: #ffffff;
         border: 1px solid #dadada;
         border-radius: 4px; }
-        #jstree2 .jstree-details-container .jstree-details-actions button:last-child {
+        #target_flow_list .jstree-details-container .jstree-details-actions button:last-child {
           margin: 0; }
-        #jstree2 .jstree-details-container .jstree-details-actions button:hover {
+        #target_flow_list .jstree-details-container .jstree-details-actions button:hover {
           color: #000000; }
 
 #vakata-dnd .jstree-copy {
@@ -354,5 +354,13 @@ html * {
     display: none; }
   .vakata-context > li > a > i:empty {
     display: none; }
+
+.jstree-node {
+  position: relative; }
+
+.jstree-numbering {
+  position: absolute;
+  top: 0;
+  left: 0; }
 
 /*# sourceMappingURL=style.css.map */
