@@ -23,6 +23,19 @@ html * {
 .jstree-anchor {
   background: #f5f5f5; }
 
+.dnd-list ::-webkit-scrollbar {
+  width: 10px; }
+.dnd-list ::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+  border-radius: 5px; }
+.dnd-list ::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5); }
+.dnd-list > * {
+  height: 90vh; }
+.dnd-list .tab-pane > div {
+  max-height: 38vh; }
+
 #actions_list .jstree-node,
 #actions_list .jstree-icon,
 #condition_list .jstree-node,
@@ -82,7 +95,7 @@ html * {
 #actions_list .jstree-node,
 #condition_list .jstree-node {
   max-width: 33%;
-  min-width: 80px;
+  min-width: 70px;
   flex-grow: 1;
   width: 100%; }
 
@@ -171,10 +184,12 @@ html * {
       display: block;
       width: 10px;
       height: 10px;
-      background: url("./assets/images/svg/arrow.svg") bottom center no-repeat;
+      background: url("../images/svg/arrow.svg") bottom center no-repeat;
       background-size: contain; }
     #target_flow_list .jstree-children.jstree-container-ul {
-      padding-bottom: 30px; }
+      padding-bottom: 33px;
+      padding-right: 10px;
+      overflow: auto; }
       #target_flow_list .jstree-children.jstree-container-ul:after, #target_flow_list .jstree-children.jstree-container-ul:before,
       #target_flow_list .jstree-children.jstree-container-ul > .jstree-node:first-child:after,
       #target_flow_list .jstree-children.jstree-container-ul > .jstree-node:first-child:before {
@@ -182,6 +197,7 @@ html * {
       #target_flow_list .jstree-children.jstree-container-ul > .jstree-node:first-child {
         padding-top: 30px; }
   #target_flow_list .jstree-node {
+    min-width: 500px;
     padding-left: 42px;
     background-image: none; }
     #target_flow_list .jstree-node:before {
@@ -199,7 +215,7 @@ html * {
       display: block;
       width: 10px;
       height: 10px;
-      background: url("./assets/images/svg/arrow.svg") bottom center no-repeat;
+      background: url("../images/svg/arrow.svg") bottom center no-repeat;
       background-size: contain; }
     #target_flow_list .jstree-node .jstree-anchor {
       display: flex;
@@ -217,12 +233,12 @@ html * {
       position: absolute;
       top: 30px;
       left: 15px;
-      background-image: url("./assets/images/svg/menu.svg");
+      background-image: url("../images/svg/menu.svg");
       background-size: 17px;
       background-position: center center;
       transition: all 0.2s ease-out; }
   #target_flow_list .jstree-custom-context-menu {
-    top: 37px;
+    top: 42px;
     right: 0.5em;
     position: absolute;
     display: inline-flex;
@@ -242,7 +258,7 @@ html * {
       bottom: 5px; }
   #target_flow_list .jstree-details {
     position: absolute;
-    top: 34px;
+    top: 40px;
     right: 45px;
     padding: 5px;
     cursor: pointer;
@@ -270,6 +286,8 @@ html * {
       align-items: center;
       justify-content: flex-end; }
       #target_flow_list .jstree-details-container .jstree-details-actions button {
+        width: 30px;
+        height: 30px;
         font-size: 18px;
         line-height: 14px;
         margin-right: 3px;
@@ -334,7 +352,7 @@ html * {
     top: 5px;
     width: 10px;
     height: 10px;
-    background: url("./assets/images/svg/menu.svg");
+    background: url("../images/svg/menu.svg");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: top;
